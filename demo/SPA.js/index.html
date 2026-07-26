@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SPA.js — demo · AetherCodez</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Interactive demo of SPA.js: keeps title, favicon, and URL in sync across a same-origin iframe shell.">
+<link rel="icon" href="../../assets/logos/avatar.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/code/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">
+      <img src="../../assets/logos/avatar.svg" alt="">
+      AetherCodez <span class="org label-hide-sm">/ open-source</span>
+    </a>
+    <div class="nav-links">
+      <a href="../../index.html#packages">Packages</a>
+      <a href="../CacheBuster.js/index.html">CacheBuster.js</a>
+      <a class="gh-link" href="https://github.com/AetherCodez/SPA.js" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        Source
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap demo-hero">
+  <a class="back-link" href="../../index.html">&larr; all packages</a>
+  <span class="pkg-mark">SP</span>
+  <h1>SPA.js</h1>
+  <p class="lede">
+    Turns a page into a persistent, full-viewport frame that quietly stays in sync with the real
+    document &mdash; title, favicon, background, and the address bar itself &mdash; so navigating
+    between pages on the same origin feels continuous, without a client-side router.
+  </p>
+  <div class="tag-row">
+    <span>same-origin only</span>
+    <span>no network interception</span>
+    <span>~2.9 KB min</span>
+  </div>
+</div>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="stage">
+      <p class="stage-label">Live demo &mdash; simulated browser chrome</p>
+
+      <div class="mock-browser">
+        <div class="mock-chrome">
+          <div class="mock-dots"><span></span><span></span><span></span></div>
+          <div class="mock-urlbar">
+            <img id="mockFavicon" src="../../assets/logos/avatar.svg" alt="">
+            <span class="url-text" id="mockUrl">https://example.com/</span>
+          </div>
+          <div class="mock-tab">
+            <img src="../../assets/logos/avatar.svg" alt="">
+            <span id="mockTabTitle">Home</span>
+          </div>
+        </div>
+        <div class="mock-body" id="mockBody">
+          <h4 id="mockHeading">Home</h4>
+          <p>This box represents the top-level page. Click below to simulate an in-app
+             navigation &mdash; watch the URL bar, tab title, and favicon update together,
+             the way SPA.js syncs an iframe with its host.</p>
+        </div>
+      </div>
+
+      <div class="mock-controls">
+        <button class="btn btn-primary" data-nav="home">Home</button>
+        <button class="btn" data-nav="docs">Docs</button>
+        <button class="btn" data-nav="pricing">Pricing</button>
+        <button class="btn" data-nav="external">Follow external link</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">how it works</p>
+      <h2 style="font-size:24px; margin-bottom:16px;">Two small pieces, one message channel</h2>
+      <p style="color:var(--text-muted); font-size:15px;">
+        SPA.js runs the same script on both sides of the frame boundary and figures out which
+        role to play by checking whether it's already inside an iframe.
+      </p>
+    </div>
+    <ul class="feature-list">
+      <li><span class="num">01</span><span><strong>Host page</strong> mounts a full-viewport iframe pointed at the original URL, then listens for <code>postMessage</code> updates.</span></li>
+      <li><span class="num">02</span><span><strong>Framed page</strong> watches its own title, favicon, background, and history state via <code>MutationObserver</code> and reports changes up.</span></li>
+      <li><span class="num">03</span><span><strong>Same-origin links</strong> update the outer URL with <code>history.pushState</code>, so back/forward and shareable URLs keep working.</span></li>
+      <li><span class="num">04</span><span><strong>Cross-origin links</strong> are handed off to a real, visible navigation &mdash; nothing is masked or intercepted silently.</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Usage</h2>
+      <p>One script tag, no configuration. Add it once, at the end of <code>&lt;body&gt;</code>, on every page of the site.</p>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="path">index.html</span>
+        <button class="copy-btn" data-copy="#usage-snippet">copy</button>
+      </div>
+      <pre id="usage-snippet"><span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"https://cdn.jsdelivr.net/gh/AetherCodez/SPA.js/spa.min.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>
+<span class="tok-com">&lt;!-- that's it &mdash; no init call, no config object --&gt;</span></pre>
+    </div>
+
+    <table class="api-table" style="margin-top:32px;">
+      <thead>
+        <tr><th>Behavior</th><th>Detail</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Sync target</td><td>Document title, favicon (<code>&lt;link rel="icon"&gt;</code>), computed background color, and <code>location.href</code>.</td></tr>
+        <tr><td>Origin policy</td><td>Only same-origin navigations are absorbed into the frame; anything else triggers a normal top-level navigation.</td></tr>
+        <tr><td>Network</td><td>The script never proxies, intercepts, or rewrites network requests &mdash; it only relays DOM state via <code>postMessage</code>.</td></tr>
+        <tr><td>Fallback</td><td>A 500&nbsp;ms poll backstops frameworks that mutate the URL in ways <code>pushState</code>/<code>popstate</code> hooks don't catch.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 AetherCodez &middot; MIT licensed</span>
+    <span><a href="https://github.com/AetherCodez/SPA.js" target="_blank" rel="noopener">github.com/AetherCodez/SPA.js</a></span>
+  </div>
+</footer>
+
+<script src="../../assets/code/main.js"></script>
+<script src="../../assets/code/spa-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CacheBuster.js — demo · AetherCodez</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Interactive demo of CacheBuster.js: force a hard reload past stale browser or CDN caches with one function call.">
+<link rel="icon" href="../../assets/logos/avatar.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/code/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">
+      <img src="../../assets/logos/avatar.svg" alt="">
+      AetherCodez <span class="org label-hide-sm">/ open-source</span>
+    </a>
+    <div class="nav-links">
+      <a href="../../index.html#packages">Packages</a>
+      <a href="../SPA.js/index.html">SPA.js</a>
+      <a class="gh-link" href="https://github.com/AetherCodez/CacheBuster.js" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        Source
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap demo-hero">
+  <a class="back-link" href="../../index.html">&larr; all packages</a>
+  <span class="pkg-mark">CB</span>
+  <h1>CacheBuster.js</h1>
+  <p class="lede">
+    A 25-line utility for forcing a page past a stale cache. Call <code>cachebuster.clearCache()</code>
+    and it appends a fresh, one-time query parameter, reloads, then quietly cleans the URL back up.
+  </p>
+  <div class="tag-row">
+    <span>1 global: <code>window.cachebuster</code></span>
+    <span>no dependencies</span>
+    <span>&lt;0.3 KB min</span>
+  </div>
+</div>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="stage">
+      <p class="stage-label">Live demo &mdash; simulated asset cache</p>
+
+      <div class="hash-display">
+        <span class="key">current cache key</span>
+        <span class="val" id="cacheKey">a53f9c1e</span>
+      </div>
+
+      <div class="asset-grid" id="assetGrid">
+        <div class="asset-chip" data-asset="style.css">
+          <span class="name">style.css</span>
+          <span class="stamp">cached · a53f9c1e</span>
+        </div>
+        <div class="asset-chip" data-asset="main.js">
+          <span class="name">main.js</span>
+          <span class="stamp">cached · a53f9c1e</span>
+        </div>
+        <div class="asset-chip" data-asset="logo.svg">
+          <span class="name">logo.svg</span>
+          <span class="stamp">cached · a53f9c1e</span>
+        </div>
+      </div>
+
+      <div class="mock-controls">
+        <button class="btn btn-primary" id="bustBtn">cachebuster.clearCache()</button>
+        <button class="btn" id="hitBtn">simulate normal page load</button>
+      </div>
+
+      <p class="stage-label" style="margin-top:22px;">Console</p>
+      <div class="log-panel" id="logPanel"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">how it works</p>
+      <h2 style="font-size:24px; margin-bottom:16px;">A disposable query parameter, nothing more</h2>
+      <p style="color:var(--text-muted); font-size:15px;">
+        No service worker, no cache-control headers to manage, no server changes. It leans entirely
+        on the fact that a new URL is, by definition, not yet in any cache.
+      </p>
+    </div>
+    <ul class="feature-list">
+      <li><span class="num">01</span><span><strong>On load</strong>, it checks the URL for a leftover <code>?cachebuster=</code> param and strips it via <code>history.replaceState</code> so it never lingers or gets shared.</span></li>
+      <li><span class="num">02</span><span><strong><code>clearCache()</code></strong> sets that param to a fresh <code>crypto.randomUUID()</code> and calls <code>location.replace()</code>, forcing every cache layer to treat it as a brand-new URL.</span></li>
+      <li><span class="num">03</span><span><strong>Auto-clear</strong> is opt-in: add an <code>autoclear</code> attribute to any <code>&lt;script&gt;</code> tag on the page and it clears on first load automatically.</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Usage</h2>
+      <p>Include the script, then call the global whenever you need a guaranteed-fresh load &mdash; for example after deploying a fix.</p>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="path">index.html</span>
+        <button class="copy-btn" data-copy="#usage-snippet">copy</button>
+      </div>
+      <pre id="usage-snippet"><span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"https://cdn.jsdelivr.net/gh/AetherCodez/CacheBuster.js/cachebuster.min.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>
+
+<span class="tok-tag">&lt;script&gt;</span>
+  <span class="tok-com">// call this whenever a hard refresh is needed</span>
+  document.querySelector(<span class="tok-str">"#refresh-btn"</span>).addEventListener(<span class="tok-str">"click"</span>, () => {
+    cachebuster.clearCache();
+  });
+<span class="tok-tag">&lt;/script&gt;</span>
+
+<span class="tok-com">&lt;!-- or, clear automatically on every load: --&gt;</span>
+<span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"cachebuster.min.js"</span> <span class="tok-attr">autoclear</span><span class="tok-tag">&gt;&lt;/script&gt;</span></pre>
+    </div>
+
+    <table class="api-table" style="margin-top:32px;">
+      <thead>
+        <tr><th>Member</th><th>Detail</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>window.cachebuster.clearCache()</td><td>Appends a fresh random ID as <code>?cachebuster=</code> and reloads via <code>location.replace()</code>.</td></tr>
+        <tr><td>autoclear attribute</td><td>Add to the script tag to call <code>clearCache()</code> once, automatically, on first load.</td></tr>
+        <tr><td>URL cleanup</td><td>The param is stripped with <code>history.replaceState</code> immediately after the busted load completes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 AetherCodez &middot; MIT licensed</span>
+    <span><a href="https://github.com/AetherCodez/CacheBuster.js" target="_blank" rel="noopener">github.com/AetherCodez/CacheBuster.js</a></span>
+  </div>
+</footer>
+
+<script src="../../assets/code/main.js"></script>
+<script src="../../assets/code/cachebuster-demo.js"></script>
+</body>
+</html>

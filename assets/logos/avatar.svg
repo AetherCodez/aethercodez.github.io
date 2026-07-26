@@ -1,0 +1,6 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AetherCodez logo">
+  <rect width="64" height="64" rx="16" fill="#0a0a0a"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#26261f" stroke-width="1.5"/>
+  <path d="M32 14 L48 46 H41.5 L38 38 H26 L22.5 46 H16 Z M32 24.5 L27.5 33 H36.5 Z"
+        fill="#ff6a2c"/>
+</svg>

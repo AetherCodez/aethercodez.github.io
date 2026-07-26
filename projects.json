@@ -1,0 +1,28 @@
+[
+  {
+    "id": "spa-js",
+    "name": "SPA.js",
+    "tagline": "Wraps any static site in a persistent, same-origin frame and keeps the title, favicon, and URL bar in sync — so multi-page sites get SPA-style continuity without a router or a framework.",
+    "icon": "assets/logos/spa.svg",
+    "initials": "SP",
+    "size": "~2.9 KB min",
+    "deps": 0,
+    "license": "MIT",
+    "extraTag": "~600 lines",
+    "demoUrl": "demo/SPA.js/index.html",
+    "repoUrl": "https://github.com/AetherCodez/SPA.js"
+  },
+  {
+    "id": "cachebuster-js",
+    "name": "CacheBuster.js",
+    "tagline": "A one-function utility for forcing a hard reload past aggressive browser or CDN caches — useful when you've just shipped a fix and can't wait for a cache to expire.",
+    "icon": "assets/logos/cachebuster.svg",
+    "initials": "CB",
+    "size": "<0.3 KB min",
+    "deps": 0,
+    "license": "MIT",
+    "extraTag": "25 lines",
+    "demoUrl": "demo/CacheBuster.js/index.html",
+    "repoUrl": "https://github.com/AetherCodez/CacheBuster.js"
+  }
+]

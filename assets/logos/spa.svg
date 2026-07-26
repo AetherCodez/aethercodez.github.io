@@ -1,0 +1,8 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SPA.js icon">
+  <rect x="4" y="10" width="40" height="30" rx="5" fill="none" stroke="#3a3a30" stroke-width="2"/>
+  <rect x="4" y="10" width="40" height="8" rx="5" fill="#1b1b18"/>
+  <circle cx="10" cy="14" r="1.4" fill="#3a3a30"/>
+  <circle cx="14.5" cy="14" r="1.4" fill="#3a3a30"/>
+  <rect x="10" y="22" width="28" height="14" rx="3" fill="none" stroke="#ff6a2c" stroke-width="2"/>
+  <path d="M18 29 L21.5 32.5 L28 25.5" stroke="#ff6a2c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
