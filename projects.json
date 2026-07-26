@@ -9,7 +9,7 @@
     "deps": 0,
     "license": "MIT",
     "extraTag": "~600 lines",
-    "demoUrl": "demo/SPA.js/index.html",
+    "demoUrl": "demo/SPA.js/",
     "repoUrl": "https://github.com/AetherCodez/SPA.js"
   },
   {
@@ -22,7 +22,7 @@
     "deps": 0,
     "license": "MIT",
     "extraTag": "25 lines",
-    "demoUrl": "demo/CacheBuster.js/index.html",
+    "demoUrl": "demo/CacheBuster.js/",
     "repoUrl": "https://github.com/AetherCodez/CacheBuster.js"
   }
 ]
