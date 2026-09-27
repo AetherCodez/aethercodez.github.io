@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- If we add any new projects, they will show up uncached -->
+<script src="https://cdn.jsdelivr.net/gh/AetherCodez/CacheBuster.js/cachebuster.min.js" autoclear>
+</script>
 <title>AetherCodez — small tools, no framework tax</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="AetherCodez builds tiny, dependency-free vanilla JS utilities: SPA.js and CacheBuster.js. Drop in a script tag, get one job done well.">
@@ -143,6 +146,7 @@
 
 <script src="assets/code/main.js"></script>
 <script src="assets/code/render-projects.js"></script>
+<!-- Look! We use our own SPA.js system :D -->
 <script src="https://cdn.jsdelivr.net/gh/AetherCodez/SPA.js/spa.js"></script>
 </body>
 </html>
